@@ -9,10 +9,7 @@
   </head>
 
   <body>
-    <% if notice %>
-      <div class="alert alert-success"><%= notice %></div>
-    <% end %>
-
+    <%= render 'layouts/notice' %>
     <%= yield %>
   </body>
 </html>
