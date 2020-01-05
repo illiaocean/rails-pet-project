@@ -1,11 +1,13 @@
+<% if @post.image.attached? %>
+  <p>
+    <strong>Image:</strong>
+    <img src="<%= url_for(@post.image)%>">
+  </p>
+<% end %>
+
 <p>
   <strong>Description:</strong>
   <%= @post.description %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @post.image %>
 </p>
 
 <% if @post.user %>
