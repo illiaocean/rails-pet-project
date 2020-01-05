@@ -3,10 +3,12 @@
   <%= @user.username %>
 </p>
 
-<p>
-  <strong>Avatar:</strong>
-  <%= @user.avatar %>
-</p>
+<% if @user.avatar.attached? %>
+  <p>
+    <strong>Avatar:</strong>
+    <img src="<%= url_for(@user.avatar)%>">
+  </p>
+<% end %>
 
 <p>
   <strong>Bio:</strong>

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :posts
+  has_one_attached :avatar
 
   before_save { self.email = email.downcase }
 

@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
+      @user.avatar.attach(user_params[:avatar])
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
