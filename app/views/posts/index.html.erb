@@ -15,8 +15,9 @@
         <td><%= post.description %></td>
         <td><%= post.image %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if is_logged_in? && post.user == get_current_user %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <% end  %>
       </tr>
     <% end %>
   </tbody>
