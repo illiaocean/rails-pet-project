@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -56,5 +57,12 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:username, :email, :password, :avatar, :bio)
+    end
+
+    def require_same_user
+      if !is_logged_in? || get_current_user != @user
+        notice = "You can only edit or delete your own account."
+        redirect_to root_path
+      end
     end
 end
