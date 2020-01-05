@@ -17,6 +17,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
     <%= f.label :avatar %>
     <%= f.text_field :avatar %>
   </div>
@@ -27,6 +37,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(@user.new_record? ? "Sign Up" : "Update Account") %>
   </div>
 <% end %>
