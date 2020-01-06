@@ -1,30 +1,36 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :require_user, except: [:index, :show]
+  before_action :set_post, only: [:show, :like, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show, :like]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
-  # GET /posts
-  # GET /posts.json
   def index
     @posts = Post.all
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
   end
 
-  # GET /posts/new
+  def like
+    user = get_current_user
+
+    if @post.liked_by_user?(user)
+      # Unlike the post if it is liked
+      @post.liked_by = @post.liked_by - [user]
+    else
+      # Like the post if it is not liked yet
+      @post.liked_by << user
+    end
+
+    redirect_to @post
+  end
+
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(post_params)
     @post.user = get_current_user
@@ -40,8 +46,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       image = post_params[:image]
@@ -56,8 +60,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|

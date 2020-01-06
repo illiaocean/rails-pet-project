@@ -1,7 +1,14 @@
+<% if @post.user %>
+  <p>
+    <strong>Author:</strong>
+    <%= @post.user.username %>
+  </p>
+<% end  %>
+
 <% if @post.image.attached? %>
   <p>
     <strong>Image:</strong>
-    <img src="<%= url_for(@post.image)%>">
+    <img src="<%= url_for(@post.image)%>" width="500px">
   </p>
 <% end %>
 
@@ -10,14 +17,14 @@
   <%= @post.description %>
 </p>
 
-<% if @post.user %>
-  <p>
-    <strong>Author:</strong>
-    <%= @post.user.username %>
-  </p>
-<% end  %>
+<p>
+  <strong>Likes:</strong>
+  <%= @post.liked_by.count %>
+</p>
 
-<% get_current_user %>
+<% if is_logged_in? %>
+  <%= button_to @post.liked_by_user?(get_current_user) ? "Unlike" : "Like", like_post_path(@post) %>
+<% end  %>
 
 <% if is_logged_in? && @post.user == get_current_user %>
   <%= link_to 'Edit', edit_post_path(@post) %> |
