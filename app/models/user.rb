@@ -1,6 +1,11 @@
 class User < ApplicationRecord
-  has_many :posts
   has_one_attached :avatar
+
+  has_many :posts
+
+  # Like associations
+  has_many :likes
+  has_many :liked_posts, through: :likes, source: :postli
 
   before_save { self.email = email.downcase }
 
