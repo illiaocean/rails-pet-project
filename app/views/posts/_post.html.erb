@@ -1,0 +1,33 @@
+<div class="post card mb-3">
+  <% if post.image.attached? %>
+    <img src="<%= url_for(post.image)%>" class="post__image card-img-top">
+  <% end %>
+
+  <div class="card-body">
+    <p class="card-text">
+      <% if post.user %>
+        <b>
+          <%= post.user.username %>
+        </b>
+      <% end %>
+
+      <%= post.description %>
+    </p>
+
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+    <% if is_logged_in? %>
+      <%= button_to post.liked_by_user?(get_current_user) ? "Unlike" : "Like", like_post_path(post) %>
+    <% end  %>
+
+    <p>
+      <strong>Likes:</strong>
+      <%= post.liked_by.count %>
+    </p>
+
+    <% if is_logged_in? && post.user == get_current_user %>
+      <%= link_to 'Edit', edit_post_path(post) %> |
+      <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <% end  %>
+  </div>
+</div>
