@@ -1,3 +1,9 @@
-<h1>Welcome to ABC social</h1>
-<%= link_to 'Sign Up', signup_path %>
-<%= link_to 'Sign In', signin_path %>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to Friends!</h1>
+  <p class="lead">Share pictures and keep in touch with your close ones.</p>
+  <hr class="my-4">
+
+  <%= link_to 'Sign Up', signup_path, class: "btn btn-primary btn-lg btn-block" %>
+  <br>
+  <%= link_to 'Sign In', signin_path, class: "btn btn-secondary btn-sm btn-block" %>
+</div>
