@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :password, :avatar, :bio)
+      params.require(:user).permit(:username, :email, :full_name, :password, :avatar, :bio)
     end
 
     def require_same_user
