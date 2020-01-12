@@ -1,5 +1,24 @@
 .post {
+  position: relative;
+
   &__image {
     max-width: 100%;
+  }
+
+  &__time {
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  &__heart {
+    &_liked {
+      color: red;
+    }
+  }
+
+  &__edit-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 }
