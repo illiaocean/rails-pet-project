@@ -43,5 +43,9 @@
 
   <div class="actions">
     <%= f.submit(@user.new_record? ? "Sign Up" : "Update Account", class: "btn btn-primary") %>
+
+    <% if !@user.new_record? %>
+      <%= link_to 'Cancel', @user, class: "btn btn-outline-dark" %>
+    <% end %>
   </div>
 <% end %>

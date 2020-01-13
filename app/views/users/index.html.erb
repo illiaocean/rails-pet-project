@@ -3,14 +3,7 @@
 <ul class="list-group">
   <% @users.each do |user| %>
     <%= link_to(user_path(user), class: "list-group-item list-group-item-action") do %>
-      <img src="<%= user.avatar.attached? ? url_for(user.avatar) : image_path("default-avatar.png") %>"
-           class="user__avatar">
-
-      <b class="user__username">
-        <%= '@' + user.username %>
-      </b>
-
-      <%= user.full_name %>
+        <%= render 'header', user: user %>
     <% end %>
   <% end %>
 </ul>

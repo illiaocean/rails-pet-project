@@ -1,8 +1,6 @@
-.user {
-  &__list-item {
-    display: flex;
-    align-items: center;
-  }
+.user-header {
+  display: flex;
+  align-items: center;
 
   &__avatar {
     width: 50px;
@@ -11,5 +9,15 @@
 
   &__username {
     margin: 0 1rem;
+  }
+}
+
+.user-card {
+  position: relative;
+
+  &__edit-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 }
