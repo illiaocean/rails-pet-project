@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
+  before_action :require_user
   before_action :set_post, only: [:show, :like, :edit, :update, :destroy]
-  before_action :require_user, except: [:index, :show, :like]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
