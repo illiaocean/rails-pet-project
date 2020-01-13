@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
@@ -52,6 +52,18 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'Account was successfully deleted.' }
       format.json { head :no_content }
     end
+  end
+
+  def follow
+    current_user = get_current_user()
+
+    if @user.followed_by?(current_user.id)
+      current_user.unfollow(@user.id)
+    else
+      current_user.follow(@user.id)
+    end
+
+    redirect_to @user
   end
 
   private

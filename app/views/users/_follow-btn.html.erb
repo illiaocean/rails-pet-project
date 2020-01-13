@@ -1,0 +1,7 @@
+<%= link_to(follow_user_path(user), method: :post, class: "user-card__follow-btn btn btn-outline-secondary btn-sm") do %>
+  <% if user.followed_by?(get_current_user().id) %>
+    Unfollow
+  <% else %>
+    <i class="material-icons">person_add</i> Follow
+  <% end %>
+<% end %>

@@ -11,6 +11,6 @@ class Post < ApplicationRecord
   validates :description, presence: true, length: { maximum: 1000 }
 
   def liked_by_user?(user)
-    self.liked_by.include?(user)
+    liked_by.include?(user)
   end
 end

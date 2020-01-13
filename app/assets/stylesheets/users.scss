@@ -19,7 +19,7 @@
 .user-card {
   position: relative;
 
-  &__edit-btn {
+  &__edit-btn, &__follow-btn {
     position: absolute;
     top: 1rem;
     right: 1rem;
