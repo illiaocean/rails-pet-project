@@ -6,4 +6,10 @@
   </b>
 
   <%= user.full_name %>
+
+  <% if show_post_count %>
+    <span class="user-header__post-count">
+      <%= pluralize(user.posts.count, "post") %>
+    </span>
+  <% end %>
 </div>

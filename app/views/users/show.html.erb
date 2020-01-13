@@ -1,6 +1,6 @@
 <div class="user-card card">
   <div class="card-body">
-    <%= render 'header', user: @user %>
+    <%= render 'header', user: @user, show_post_count: true %>
 
     <br>
 
@@ -13,3 +13,10 @@
     <% end %>
   </div>
 </div>
+
+<br>
+
+<% @user.posts.each do |post| %>
+  <%= render 'posts/post', post: post %>
+  <br>
+<% end %>
