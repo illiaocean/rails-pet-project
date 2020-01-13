@@ -1,6 +1,8 @@
 <div class="user-card card">
   <div class="card-body">
-    <%= render 'header', user: @user, show_post_count: true %>
+    <%= render 'header', user: @user %>
+
+    <%= render 'stats', user: @user %>
 
     <br>
 

@@ -1,0 +1,16 @@
+<div class="user-stats">
+  <span>
+    <b><%= user.posts.count %></b>
+    <%= "post".pluralize(user.posts.count) %>
+  </span>
+
+  <span>
+    <b><%= user.followers.count %></b>
+    <%= "follower".pluralize(user.followers.count) %>
+  </span>
+
+  <span>
+    <b><%= user.following.count %></b>
+    following
+  </span>
+</div>

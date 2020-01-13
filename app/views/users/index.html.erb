@@ -3,7 +3,7 @@
 <ul class="list-group">
   <% @users.each do |user| %>
     <%= link_to(user_path(user), class: "list-group-item list-group-item-action") do %>
-        <%= render 'header', user: user, show_post_count: false %>
+        <%= render 'header', user: user %>
     <% end %>
   <% end %>
 </ul>
