@@ -31,6 +31,6 @@
   </div>
 
   <% if show_comments && post.comments.count > 0 %>
-    <%= render 'comments', comments: post.comments %>
+    <%= render 'comments', comments: post.comments, new_comment: new_comment %>
   <% end %>
 </div>

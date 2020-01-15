@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_user
-  before_action :set_post, only: [:show, :like, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :like, :add_new_comment, :edit, :update, :destroy]
+  before_action :set_new_comment, only: [:show]
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
@@ -21,6 +22,14 @@ class PostsController < ApplicationController
       @post.liked_by << user
     end
 
+    redirect_to @post
+  end
+
+  def add_new_comment
+    comment = Comment.new(new_comment_params)
+    comment.user = get_current_user
+    comment.post = @post
+    comment.save()
     redirect_to @post
   end
 
@@ -69,12 +78,20 @@ class PostsController < ApplicationController
   end
 
   private
+    def set_new_comment
+      @new_comment = Comment.new
+    end
+
     def set_post
       @post = Post.find(params[:id])
     end
 
     def post_params
       params.require(:post).permit(:description, :image)
+    end
+
+    def new_comment_params
+      params.require(:comment).permit(:text)
     end
 
     def require_same_user

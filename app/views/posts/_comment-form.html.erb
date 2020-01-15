@@ -1,0 +1,18 @@
+<%= form_with(model: @new_comment, class: "", url: add_new_comment_post_path) do |f| %>
+  <% if @new_comment.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+
+      <ul>
+        <% comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.text_area :text, class: "form-control", placeholder: "Post comment", required: true %>
+  </div>
+
+  <%= f.submit("Post", class: "btn btn-primary") %>
+<% end %>
