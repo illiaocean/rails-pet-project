@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :liked_by, through: :likes, source: :user
 
+  has_many :comments
+
   validates :user_id,  presence: true
   validates :description, presence: true, length: { maximum: 1000 }
 
