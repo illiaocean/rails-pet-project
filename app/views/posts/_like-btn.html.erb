@@ -1,0 +1,8 @@
+<%= link_to(like_post_path(post), method: :post, class: "post__like-btn btn btn-outline-dark") do %>
+  <% if post.liked_by_user?(get_current_user) %>
+    <i class="material-icons post__heart_liked">favorite</i>
+  <% else %>
+    <i class="material-icons">favorite_border</i>
+  <% end %>
+  <%= post.liked_by.count %>
+<% end %>
