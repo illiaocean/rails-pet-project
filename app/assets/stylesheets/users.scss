@@ -3,8 +3,12 @@
   align-items: center;
 
   &__avatar {
-    width: 50px;
+    $size: 50px;
+    width: $size;
+    height: $size;
     border-radius: 50%;
+    background-position: center;
+    background-size: cover;
   }
 
   &__username {

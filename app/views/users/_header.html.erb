@@ -1,5 +1,6 @@
 <div class="user-header">
-  <img src="<%= user.avatar.attached? ? url_for(user.avatar) : image_path("default-avatar.png") %>" class="user-header__avatar">
+  <% url = user.avatar.attached? ? url_for(user.avatar) : image_path("default-avatar.png") %>
+  <div class="user-header__avatar" style="background-image: url(<%= url %>)"></div>
 
   <b class="user-header__username">
     <%= '@' + user.username %>
