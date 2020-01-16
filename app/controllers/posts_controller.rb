@@ -5,7 +5,17 @@ class PostsController < ApplicationController
   before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    unless params[:feed]
+      @posts = Post.all
+    else
+      current_user = get_current_user()
+      following = current_user.following
+      @posts = Post.all.select { |post|
+        following_user = following.include? post.user
+        same_user = post.user.id == current_user.id
+        following_user || same_user
+      }
+    end
   end
 
   def show

@@ -1,3 +1,10 @@
 <% @posts.each do |post| %>
   <%= render 'post', post: post, show_comments: false %>
 <% end %>
+
+<% if @posts.empty? %>
+  <div class="alert alert-info" role="alert">
+    No posts at the moment. Go ahead and follow
+    <%= link_to "someone", users_path%>!
+  </div>
+<% end %>
