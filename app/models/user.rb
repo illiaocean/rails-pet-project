@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
 
+  validates :avatar, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
+
   validates :full_name,
             presence: true,
             length: { maximum: 100 }
