@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-
   end
 
   def create
@@ -10,9 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to posts_path
     else
-      # todo: make this text red
-      # todo: make sure it is displayed
-      notice = 'User not found.'
+      @error = 'User not found. Please check your email and password.'
       render 'new'
     end
   end

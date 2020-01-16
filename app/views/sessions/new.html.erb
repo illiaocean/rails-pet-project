@@ -1,6 +1,12 @@
 <h2>Welcome Back</h1>
 
 <%= form_for(:session, url: signin_path) do |f| %>
+  <% if @error %>
+    <div class="alert alert-danger" role="alert">
+      <%= @error %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :email %>
     <%= f.text_field :email, class: "form-control" %>

@@ -1,12 +1,12 @@
 <%= form_for(user) do |f| %>
   <% if user.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert alert-danger" role="alert"
       <p><%= pluralize(user.errors.count, "validation error") %>:</p>
 
       <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
