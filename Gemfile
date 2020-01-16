@@ -40,6 +40,7 @@ gem 'material_icons'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap'
 gem 'activestorage-validator'
+gem 'toastr-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,7 +1,7 @@
 <%= form_for(post) do |f| %>
   <% if post.errors.any? %>
     <div class="alert alert-danger" role="alert">
-      <p><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <p><%= pluralize(post.errors.count, "validation error") %>:</h2>
 
       <ul>
         <% post.errors.full_messages.each do |message| %>

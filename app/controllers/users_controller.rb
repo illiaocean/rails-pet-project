@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, flash: {success: 'Welcome in!'} }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       image = user_params[:image]
       @user.image.attach(image) if image
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, flash: {success: 'Profile updated.'} }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }

@@ -5,12 +5,13 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
 
-    if user && user.authenticate(params[:session][:password])
-      session[:user_id] = user.id
-      redirect_to posts_path
-    else
-      @error = 'User not found. Please check your email and password.'
-      render 'new'
+    respond_to do |format|
+      if user && user.authenticate(params[:session][:password])
+        session[:user_id] = user.id
+        format.html { redirect_to posts_path, flash: {success: 'Welcome back :)'}}
+      else
+        format.html { redirect_to signin_path, flash: {error: 'User not found. Please check your email and password.'}}
+      end
     end
   end
 
