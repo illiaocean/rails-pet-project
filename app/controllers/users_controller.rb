@@ -48,22 +48,29 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    message = 'Account deleted. Have fun out there 👋'
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Account was successfully deleted.' }
-      format.json { head :no_content }
+      format.html { redirect_to root_path, flash: {success: message} }
+      format.json { render json: message, status: :ok }
     end
   end
 
   def follow
     current_user = get_current_user()
+    message = ''
 
     if @user.followed_by?(current_user.id)
       current_user.unfollow(@user.id)
+      message = "You unfollowed #{@user.username}"
     else
       current_user.follow(@user.id)
+      message = "Now following #{@user.username}"
     end
 
-    redirect_to @user
+    respond_to do |format|
+      format.html { redirect_to @user, flash: {success: message} }
+      format.json { render json: message, status: :ok }
+    end
   end
 
   private
