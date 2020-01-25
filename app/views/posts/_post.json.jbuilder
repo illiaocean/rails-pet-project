@@ -5,7 +5,9 @@ if post.image.attached?
 end
 
 json.author do
-  json.id post.user.id
-  json.username post.user.username
-  json.full_name post.user.full_name
+  json.extract! post.user, :id, :username, :full_name
+end
+
+json.comments post.comments do |comment|
+  json.extract! comment, :id, :text, :created_at, :updated_at
 end
