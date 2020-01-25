@@ -9,19 +9,19 @@
     <% if is_logged_in? %>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <%= link_to "My Feed", posts_path(feed: true), class: "nav-link" %>
+          <%= active_link_to "My Feed", posts_path(feed: true), active: :exact, class: "nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "My Profile", get_current_user, class: "nav-link" %>
+          <%= active_link_to "My Profile", get_current_user, active: :exact, class: "nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "Explore Posts", posts_path, class: "nav-link" %>
+          <%= active_link_to "Explore Posts", posts_path, active: :exact, class: "nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "Explore Users", users_path, class: "nav-link" %>
+          <%= active_link_to "Explore Users", users_path, active: :exact, class: "nav-link" %>
         </li>
       </ul>
     <% end %>

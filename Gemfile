@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'activestorage-validator'
+gem 'active_link_to'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap'
 gem 'bootstrap',     '4.1.1'
