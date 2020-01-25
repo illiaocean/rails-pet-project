@@ -12,7 +12,8 @@ class PostsController < ApplicationController
       following = current_user.following
       @posts = Post.all.select { |post|
         following_user = following.include? post.user
-        same_user = post.user.id == current_user.id
+        post_user_id = post.user.id unless post.user.blank?
+        same_user = post_user_id == current_user.id
         following_user || same_user
       }
     end
