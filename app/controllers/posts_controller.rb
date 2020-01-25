@@ -24,24 +24,38 @@ class PostsController < ApplicationController
 
   def like
     user = get_current_user
+    message = ''
 
     if @post.liked_by_user?(user)
       # Unlike the post if it is liked
       @post.liked_by = @post.liked_by - [user]
+      message = 'Unliked 👎'
     else
       # Like the post if it is not liked yet
       @post.liked_by << user
+      message = 'Liked 👍'
     end
 
-    redirect_to @post
+    respond_to do |format|
+      format.html { redirect_to @post, flash: {success: message}}
+      format.json { render json: message, status: :ok }
+    end
   end
 
   def add_new_comment
     comment = Comment.new(new_comment_params)
     comment.user = get_current_user
     comment.post = @post
-    comment.save()
-    redirect_to @post
+
+    respond_to do |format|
+      if comment.save()
+        format.html { redirect_to @post, flash: {success: 'Comment added.'}}
+        format.json { render :show, status: :ok }
+      else
+        format.html { render :show }
+        format.json { render json: comment.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def new
