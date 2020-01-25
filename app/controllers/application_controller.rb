@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -13,8 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    if !is_logged_in?
-      notice = "You must be logged in to perform this action."
+    unless is_logged_in?
+      notice = 'You must be logged in to perform this action.'
       redirect_to root_path
     end
   end

@@ -1,26 +1,27 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :require_user
-  before_action :set_post, only: [:show, :like, :add_new_comment, :edit, :update, :destroy]
+  before_action :set_post, only: %i[show like add_new_comment edit update destroy]
   before_action :set_new_comment, only: [:show]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def index
-    unless params[:feed]
-      @posts = Post.all
-    else
-      current_user = get_current_user()
+    if params[:feed]
+      current_user = get_current_user
       following = current_user.following
-      @posts = Post.all.select { |post|
+      @posts = Post.all.select do |post|
         following_user = following.include? post.user
         post_user_id = post.user.id unless post.user.blank?
         same_user = post_user_id == current_user.id
         following_user || same_user
-      }
+      end
+    else
+      @posts = Post.all
     end
   end
 
-  def show
-  end
+  def show; end
 
   def like
     user = get_current_user
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @post, flash: {success: message}}
+      format.html { redirect_to @post, flash: { success: message } }
       format.json { render json: message, status: :ok }
     end
   end
@@ -48,8 +49,8 @@ class PostsController < ApplicationController
     comment.post = @post
 
     respond_to do |format|
-      if comment.save()
-        format.html { redirect_to @post, flash: {success: 'Comment added.'}}
+      if comment.save
+        format.html { redirect_to @post, flash: { success: 'Comment added.' } }
         format.json { render :show, status: :ok }
       else
         format.html { render :show }
@@ -62,8 +63,7 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @post = Post.new(post_params)
@@ -71,7 +71,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, flash: {success: 'Post created.'}}
+        format.html { redirect_to @post, flash: { success: 'Post created.' } }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -85,7 +85,7 @@ class PostsController < ApplicationController
       image = post_params[:image]
       @post.image.attach(image) if image
       if @post.update(post_params)
-        format.html { redirect_to @post, flash: {success: 'Post updated.'}}
+        format.html { redirect_to @post, flash: { success: 'Post updated.' } }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -97,32 +97,33 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, flash: {success: 'Post deleted'} }
+      format.html { redirect_to posts_url, flash: { success: 'Post deleted' } }
       format.json { head :no_content }
     end
   end
 
   private
-    def set_new_comment
-      @new_comment = Comment.new
-    end
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_new_comment
+    @new_comment = Comment.new
+  end
 
-    def post_params
-      params.require(:post).permit(:description, :image)
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def new_comment_params
-      params.require(:comment).permit(:text)
-    end
+  def post_params
+    params.require(:post).permit(:description, :image)
+  end
 
-    def require_same_user
-      if get_current_user != @post.user
-        notice = "You can only edit or delete your own posts."
-        redirect_to posts_path
-      end
+  def new_comment_params
+    params.require(:comment).permit(:text)
+  end
+
+  def require_same_user
+    if get_current_user != @post.user
+      notice = 'You can only edit or delete your own posts.'
+      redirect_to posts_path
     end
+  end
 end

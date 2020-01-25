@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 json.array! @posts do |post|
   json.extract! post, :created_at, :updated_at, :description
 
-  if post.image.attached?
-    json.image_path url_for(post.image)
-  end
+  json.image_path url_for(post.image) if post.image.attached?
 
   json.like_count post.likes.count
   json.comment_count post.comments.count

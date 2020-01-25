@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'root#index'
 
   resources :users
 
   resources :users do
-      member do
-        post :follow
-      end
+    member do
+      post :follow
     end
+  end
 
   resources :posts
 

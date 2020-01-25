@@ -1,21 +1,21 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :require_user, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :follow]
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_user, except: %i[new create]
+  before_action :set_user, only: %i[show edit update destroy follow]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def index
     @users = User.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @user = User.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @user = User.new(user_params)
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
-        format.html { redirect_to @user, flash: {success: 'Welcome in!'} }
+        format.html { redirect_to @user, flash: { success: 'Welcome in!' } }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       image = user_params[:image]
       @user.image.attach(image) if image
       if @user.update(user_params)
-        format.html { redirect_to @user, flash: {success: 'Profile updated.'} }
+        format.html { redirect_to @user, flash: { success: 'Profile updated.' } }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -50,13 +50,13 @@ class UsersController < ApplicationController
     @user.destroy
     message = 'Account deleted. Have fun out there 👋'
     respond_to do |format|
-      format.html { redirect_to root_path, flash: {success: message} }
+      format.html { redirect_to root_path, flash: { success: message } }
       format.json { render json: message, status: :ok }
     end
   end
 
   def follow
-    current_user = get_current_user()
+    current_user = get_current_user
     message = ''
 
     if @user.followed_by?(current_user.id)
@@ -68,24 +68,25 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @user, flash: {success: message} }
+      format.html { redirect_to @user, flash: { success: message } }
       format.json { render json: message, status: :ok }
     end
   end
 
   private
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def user_params
-      params.require(:user).permit(:username, :email, :full_name, :password, :avatar, :bio)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def require_same_user
-      if !is_logged_in? || get_current_user != @user
-        notice = "You can only edit or delete your own account."
-        redirect_to root_path
-      end
+  def user_params
+    params.require(:user).permit(:username, :email, :full_name, :password, :avatar, :bio)
+  end
+
+  def require_same_user
+    if !is_logged_in? || get_current_user != @user
+      notice = 'You can only edit or delete your own account.'
+      redirect_to root_path
     end
+  end
 end

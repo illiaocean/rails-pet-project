@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_one_attached :avatar
 
@@ -27,10 +29,10 @@ class User < ApplicationRecord
             uniqueness: true,
             length: { minimum: 3, maximum: 25 }
 
-  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email,
             presence: true,
-            uniqueness: {case_sensitive: false},
+            uniqueness: { case_sensitive: false },
             length: { minimum: 3, maximum: 255 },
             format: { with: EMAIL_REGEX }
 
