@@ -20,7 +20,7 @@ class PostsController < ApplicationController
       posts = Post.all
     end
 
-    @posts = posts.reverse
+    @posts = posts.sort_by(&:created_at).reverse
   end
 
   def show; end

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :require_same_user, only: %i[edit update destroy]
 
   def index
-    @users = User.all.reverse
+    @users = User.all.sort_by(&:created_at).reverse
   end
 
   def show; end
