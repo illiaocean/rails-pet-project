@@ -44,6 +44,7 @@ gem 'material-sass', '4.1.1'
 gem 'material_icons'
 gem 'rubocop', require: false
 gem 'toastr-rails'
+gem 'aws-sdk-s3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
