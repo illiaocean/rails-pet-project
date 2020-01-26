@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_one_attached :avatar
 
-  has_many :posts
+  has_many :posts, -> { order('created_at DESC') }
 
   # Like associations
   has_many :likes
