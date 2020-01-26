@@ -10,15 +10,17 @@ class PostsController < ApplicationController
     if params[:feed]
       current_user = get_current_user
       following = current_user.following
-      @posts = Post.all.select do |post|
+      posts = Post.all.select do |post|
         following_user = following.include? post.user
         post_user_id = post.user.id unless post.user.blank?
         same_user = post_user_id == current_user.id
         following_user || same_user
       end
     else
-      @posts = Post.all
+      posts = Post.all
     end
+
+    @posts = posts.reverse
   end
 
   def show; end
