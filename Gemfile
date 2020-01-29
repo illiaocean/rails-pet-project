@@ -48,6 +48,7 @@ gem 'aws-sdk-s3'
 
 group :test do
   gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers', '~> 3.0', require: false
 end
 
 group :development, :test do
