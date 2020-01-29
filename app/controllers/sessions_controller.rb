@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if user&.authenticate(params[:session][:password])
         session[:user_id] = user.id
-        format.html { redirect_to posts_path, flash: { success: 'Welcome back 👋' } }
+        format.html { redirect_to posts_path(feed: true), flash: { success: 'Welcome back 👋' } }
         format.json { render json: user }
       else
         format.html { redirect_to signin_path, flash: { error: 'User not found 👀 Please check your email and password.' } }
