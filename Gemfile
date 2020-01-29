@@ -46,9 +46,15 @@ gem 'rubocop', require: false
 gem 'toastr-rails'
 gem 'aws-sdk-s3'
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.6'
+  gem 'factory_bot_rails'
 end
 
 group :development do
