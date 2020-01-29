@@ -1,24 +1,30 @@
-# README
+# Description
+This is an Instagram-like pet project I wrote to practice with Ruby and Ruby on Rails.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Deployment
+https://rails-social-playground.herokuapp.com/
 
-Things you may want to cover:
+# Main features
+- Users
+    - Sign up
+    - Sign in
+    - Edit and delete your profile
+    - View profiles of other users
+    - Follow / Unfollow other users
+- Posts
+    - Share
+    - Edit and delete your posts
+    - Like / Unlike
+    - Comment
+- Restful JSON API 
+    
+# Integrations
+`ActiveStorage` is set up to store user uploaded assets in an AWS S3 bucket.
 
-* Ruby version
+# Running locally
+1. Have a postgres db running locally: `postgres -D /usr/local/var/postgres`.
 
-* System dependencies
+2. Install dependencies and start up the server: `bundle && rails s`.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Running unit tests
+Run `rspec`.
