@@ -35,8 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'activestorage-validator'
 gem 'active_link_to'
+gem 'activestorage-validator'
+gem 'aws-sdk-s3'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap'
 gem 'bootstrap',     '4.1.1'
@@ -44,7 +45,6 @@ gem 'material-sass', '4.1.1'
 gem 'material_icons'
 gem 'rubocop', require: false
 gem 'toastr-rails'
-gem 'aws-sdk-s3'
 
 group :test do
   gem 'database_cleaner-active_record'
@@ -54,8 +54,8 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails'
+  gem 'rspec-rails', '~> 3.6'
 end
 
 group :development do
