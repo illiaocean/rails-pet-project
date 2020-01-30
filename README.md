@@ -1,7 +1,7 @@
 # Description
 This is an Instagram-like pet project I wrote to practice with Ruby and Ruby on Rails.
 
-# Deployment
+# Live Demo
 https://rails-social-playground.herokuapp.com/
 
 # Main features
